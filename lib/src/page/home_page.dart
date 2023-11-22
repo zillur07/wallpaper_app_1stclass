@@ -1,4 +1,8 @@
-import 'package:app_name/src/model/wallpaper.dart';
+// ignore_for_file: prefer_const_constructors
+
+import 'package:app_name/src/component/catagory_component.dart';
+import 'package:app_name/src/component/wellpaper_component.dart';
+
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -41,66 +45,8 @@ class HomePage extends StatelessWidget {
         ),
         drawer: const Drawer(),
         body: TabBarView(children: [
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                // GridView.builder(
-                //   shrinkWrap: true,
-                //   primary: false,
-                //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                //       crossAxisCount: 3, // Number of columns
-                //       crossAxisSpacing: 8.0, // Spacing between columns
-                //       mainAxisSpacing: 2.0,
-                //       mainAxisExtent: 250.0),
-                //   itemCount: wallpaperData.length,
-                //   itemBuilder: (BuildContext context, int index) {
-                //     final item = wallpaperData[index];
-                //     return Container(
-                //       height: 350,
-                //       width: 250,
-                //       child: Image.asset(
-                //         item.image.toString(),
-                //         fit: BoxFit.cover,
-                //       ),
-                //     );
-                //   },
-                // ),
-                GridView.builder(
-                    shrinkWrap: true,
-                    primary: false,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        crossAxisSpacing: 10.0,
-                        mainAxisSpacing: 10.0,
-                        mainAxisExtent: 250.0),
-                    itemCount: wallpaperData.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final item = wallpaperData[index];
-                      return Container(
-                        width: 250,
-                        child: Image.asset(
-                          // '${wallpaperData[index].image}',
-                          // '${item.image}',
-                          //item.image.toString(),
-                          wallpaperData[index].image.toString(),
-                          fit: BoxFit.cover,
-                        ),
-                      );
-                    })
-              ],
-            ),
-          ),
-          Container(
-            height: 300,
-            width: 200,
-            color: Colors.teal,
-            child: Center(
-              child: Text(
-                '2 number ',
-                style: TextStyle(fontSize: 30),
-              ),
-            ),
-          ),
+          WellpaperComponent(),
+          const CatagpryComponent(),
           Container(
             height: 300,
             width: 200,
