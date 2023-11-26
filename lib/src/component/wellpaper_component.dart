@@ -1,5 +1,7 @@
 import 'package:app_name/src/model/wallpaper.dart';
+import 'package:app_name/src/page/single_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class WellpaperComponent extends StatelessWidget {
   @override
@@ -19,14 +21,21 @@ class WellpaperComponent extends StatelessWidget {
             itemCount: wallpaperData.length,
             itemBuilder: (BuildContext context, int index) {
               final item = wallpaperData[index];
-              return Container(
-                width: 250,
-                child: Image.asset(
-                  // '${wallpaperData[index].image}',
-                  // '${item.image}',
-                  //item.image.toString(),
-                  wallpaperData[index].image.toString(),
-                  fit: BoxFit.cover,
+              return InkWell(
+                onTap: () {
+                  Get.to(SinglePage(
+                    wallpaper: wallpaperData[index],
+                  ));
+                },
+                child: Container(
+                  width: 250,
+                  child: Image.asset(
+                    // '${wallpaperData[index].image}',
+                    // '${item.image}',
+                    //item.image.toString(),
+                    wallpaperData[index].image.toString(),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               );
             },
