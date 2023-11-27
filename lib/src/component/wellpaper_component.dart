@@ -14,25 +14,24 @@ class WellpaperComponent extends StatelessWidget {
             shrinkWrap: true,
             primary: false,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                crossAxisSpacing: 10.0,
-                mainAxisSpacing: 10.0,
-                mainAxisExtent: 250.0),
+              crossAxisCount: 3,
+              crossAxisSpacing: 10.0,
+              mainAxisSpacing: 10.0,
+              mainAxisExtent: 250.0,
+            ),
             itemCount: wallpaperData.length,
             itemBuilder: (BuildContext context, int index) {
               final item = wallpaperData[index];
               return InkWell(
                 onTap: () {
                   Get.to(SinglePage(
-                    wallpaper: wallpaperData[index],
+                    wallpaperData: wallpaperData,
+                    initialPageIndex: index,
                   ));
                 },
                 child: Container(
                   width: 250,
                   child: Image.asset(
-                    // '${wallpaperData[index].image}',
-                    // '${item.image}',
-                    //item.image.toString(),
                     wallpaperData[index].image.toString(),
                     fit: BoxFit.cover,
                   ),
