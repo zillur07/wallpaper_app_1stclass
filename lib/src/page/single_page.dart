@@ -25,6 +25,9 @@ class SinglePage extends StatelessWidget {
       if (result['isSuccess']) {
         // Image saved successfully
         print('Image saved to gallery');
+
+        Get.snackbar('Save Wallpaper', 'Image Save your Gallery',
+            backgroundColor: Colors.green);
       } else {
         // Image save failed
         print('Failed to save image: ${result['error']}');
