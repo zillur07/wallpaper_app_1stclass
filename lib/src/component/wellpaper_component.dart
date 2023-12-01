@@ -24,7 +24,9 @@ class WellpaperComponent extends StatelessWidget {
               return InkWell(
                 onTap: () {
                   Get.to(SinglePage(
-                    wallpaper: wallpaperData[index],
+                    // initialPageIndex: index,
+                    initialPageIndex: index,
+                    wallpaperData: wallpaperData,
                   ));
                 },
                 child: Container(
