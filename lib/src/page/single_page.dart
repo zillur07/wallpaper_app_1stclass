@@ -49,7 +49,7 @@ class SinglePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          wallpaperData[initialPageIndex].name.toString(),
+          'Images',
           style: TextStyle(color: Colors.black),
         ),
         backgroundColor: Colors.white,
@@ -79,13 +79,21 @@ class SinglePage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(50),
                     color: Colors.red.withOpacity(.5),
                   ),
+                  // child: IconButton(
+                  //   onPressed: () => _downloadImage(index),
+                  //   icon: Icon(
+                  //     Icons.download,
+                  //     color: Colors.white,
+                  //     size: 30,
+                  //   ),
+                  // ),
                   child: IconButton(
-                    onPressed: () => _downloadImage(index),
-                    icon: Icon(
-                      Icons.download,
-                      color: Colors.white,
-                      size: 30,
-                    ),
+                    onPressed: () {
+                      _downloadImage(index);
+                    },
+                    icon: Icon(Icons.download),
+                    iconSize: 30,
+                    color: Colors.white,
                   ),
                 ),
               )
