@@ -40,11 +40,19 @@ dependencies:
   loop_page_view: ^1.2.5
   # image_downloader: 
   # permission_handler:
-  
+  dio: 
+  cached_network_image: ^3.3.0
+  # dio_http_cache:
+ 
+   
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  json_serializable:
+  build_runner:
+ 
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

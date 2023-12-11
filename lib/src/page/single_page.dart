@@ -1,26 +1,34 @@
 import 'package:app_name/src/model/wallpaper.dart';
+import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/response/response.dart';
+import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:loop_page_view/loop_page_view.dart';
 
 class SinglePage extends StatelessWidget {
 //.......................................
-  final List<WallpaperModel> wallpaperData;
+  final List<Photo> wallpaperData;
   final int initialPageIndex;
   SinglePage({required this.wallpaperData, required this.initialPageIndex});
 
 //..........................................................................
 
-  Future<void> _downloadImage(int imageItme) async {
+// ...
+
+  Future<void> _downloadImage(int imageItem) async {
     try {
-      // Load image bytes from asset bundle
+      Photo wallpaper = wallpaperData[imageItem];
 
-      WallpaperModel wallpaper = wallpaperData[imageItme];
+      // Fetch the image bytes using Dio
+      dio.Response<List<int>> response = await dio.Dio().get<List<int>>(
+        wallpaper.src.original,
+        options: dio.Options(responseType: dio.ResponseType.bytes),
+      );
 
-      ByteData data = await rootBundle.load('${wallpaper.image}');
-      Uint8List bytes = data.buffer.asUint8List();
+      Uint8List bytes = Uint8List.fromList(response.data!);
 
       // Save image to gallery
       var result = await ImageGallerySaver.saveImage(
@@ -31,13 +39,13 @@ class SinglePage extends StatelessWidget {
       if (result['isSuccess']) {
         Get.showSnackbar(
           const GetSnackBar(
-            title: 'Downlod successfully ',
-            message: 'Image save Successfully',
+            title: 'Download successfully ',
+            message: 'Image saved Successfully',
             icon: Icon(
               Icons.download,
               color: Colors.white,
             ),
-            duration: Duration(seconds: 1),
+            duration: Duration(seconds: 3),
           ),
         );
       } else {
@@ -65,14 +73,16 @@ class SinglePage extends StatelessWidget {
       ),
       body: LoopPageView.builder(
         itemCount: wallpaperData.length,
+        onPageChanged: (index) {},
+        controller: LoopPageController(initialPage: initialPageIndex),
         itemBuilder: (BuildContext context, int index) {
           return Stack(
             children: [
               Container(
                 height: Get.height,
                 width: Get.width,
-                child: Image.asset(
-                  '${wallpaperData[index].image}',
+                child: Image.network(
+                  wallpaperData[index].src.medium,
                   fit: BoxFit.cover,
                 ),
               ),
