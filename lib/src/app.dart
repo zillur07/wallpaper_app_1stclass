@@ -10,6 +10,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(WallpaperController());
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       home: HomePage(),
     );
   }

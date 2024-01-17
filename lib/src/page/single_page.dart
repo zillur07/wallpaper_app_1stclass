@@ -81,7 +81,7 @@ class SinglePage extends StatelessWidget {
                 height: Get.height,
                 width: Get.width,
                 child: Image.network(
-                  wallpaperData[index].src.medium,
+                  wallpaperData[index].src.large,
                   fit: BoxFit.cover,
                 ),
               ),

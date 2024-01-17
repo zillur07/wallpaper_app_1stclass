@@ -53,7 +53,7 @@ class HomePage extends StatelessWidget {
         drawer: const Drawer(),
         body: TabBarView(children: [
           WellpaperComponent(),
-          const CatagpryComponent(),
+          CatagpryComponent(),
           Container(
             height: 300,
             width: 200,
