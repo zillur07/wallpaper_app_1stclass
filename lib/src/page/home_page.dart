@@ -2,8 +2,11 @@
 
 import 'package:app_name/src/component/catagory_component.dart';
 import 'package:app_name/src/component/wellpaper_component.dart';
+import 'package:app_name/src/page/srch_page.dart';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key});
@@ -21,7 +24,11 @@ class HomePage extends StatelessWidget {
           ),
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.to(
+                  (SearchPage()),
+                );
+              },
               icon: Icon(
                 Icons.search,
               ),
@@ -61,10 +68,4 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
-}
-
-void main() {
-  runApp(const MaterialApp(
-    home: HomePage(),
-  ));
 }
