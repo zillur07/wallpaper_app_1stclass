@@ -10,7 +10,7 @@ class CatagpryComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<WallpaperController>(
       builder: (controller) => SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
             Obx(
