@@ -60,16 +60,18 @@ class SinglePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
+        centerTitle: true,
         title: Text(
-          'Images',
-          style: TextStyle(color: Colors.black),
+          'Wallpaper',
+          style: TextStyle(fontWeight: FontWeight.w600, color: Colors.pink),
         ),
-        backgroundColor: Colors.white,
-        iconTheme: const IconThemeData(
-          color: Colors.black,
-        ),
+        backgroundColor:
+            Colors.transparent, // Set the background color to transparent
+        elevation: 0, // This removes the shadow from the AppBar
       ),
+      extendBodyBehindAppBar: true,
       body: LoopPageView.builder(
         itemCount: wallpaperData.length,
         onPageChanged: (index) {},

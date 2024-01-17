@@ -41,9 +41,15 @@ class CatagpryComponent extends StatelessWidget {
                       child: Stack(
                         children: [
                           Container(
+                            height: 150,
                             width: Get.width - 200,
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(5),
+                                bottomRight: Radius.circular(5),
+                                topLeft: Radius.circular(12),
+                                topRight: Radius.circular(12),
+                              ),
                               child: Image.network(
                                 category.catImgUrl,
                                 fit: BoxFit.cover,
@@ -54,11 +60,14 @@ class CatagpryComponent extends StatelessWidget {
                             bottom: 0,
                             child: Container(
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
+                                borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(5),
+                                  bottomRight: Radius.circular(5),
+                                ),
                                 color: Colors.black.withOpacity(0.4),
                               ),
                               height: 50,
-                              width: Get.width - 200,
+                              width: Get.width - 212,
                               child: Center(
                                 child: Text(
                                   category.catName,

@@ -151,6 +151,8 @@ class WallpaperController extends GetxController {
     List<String> categoryNameList = [
       "Cars",
       "Flowers",
+      'Birds',
+      'Fish',
       "Nature",
       "Travel",
       'Girl',
@@ -170,6 +172,7 @@ class WallpaperController extends GetxController {
       'Coding',
       'Dark',
       'Computer',
+      'Phone'
     ];
 
     categoryModelList.clear();
