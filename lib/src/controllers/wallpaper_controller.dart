@@ -21,6 +21,7 @@ class WallpaperController extends GetxController {
   void onInit() {
     fetchWallpapers();
     fetchWallpapersForCategories1();
+
     fetchWallpapersSearch();
     super.onInit();
   }
@@ -52,7 +53,7 @@ class WallpaperController extends GetxController {
     try {
       // Use the stored search query from the controller
       final response = await Dio().get(
-        '$_baseUrl/search?query=${currentSearchQuery}&per_page=30&page=1',
+        '$_baseUrl/search?query=${currentSearchQuery}&per_page=50&page=1',
         options: Options(
           headers: {"Authorization": _apikey},
         ),
@@ -67,35 +68,108 @@ class WallpaperController extends GetxController {
     }
   }
 
-  Future<List<Photo>> fetchWallpapersSearch1(String query) async {
-    try {
-      final response = await Dio().get(
-        '$_baseUrl/search?query=$query&per_page=12',
-        options: Options(
-          headers: {"Authorization": _apikey},
-        ),
-      );
+  // Future<List<Photo>> fetchWallpapersSearch1(String query) async {
+  //   try {
+  //     final response = await Dio().get(
+  //       '$_baseUrl/search?query=$query&per_page=20',
+  //       options: Options(
+  //         headers: {"Authorization": _apikey},
+  //       ),
+  //     );
 
-      final data = PexelsResponse.fromJson(response.data);
-      return data.photos;
-    } catch (e) {
-      print("Error fetching wallpapers for category: $e");
-      return [];
+  //     final data = PexelsResponse.fromJson(response.data);
+
+  //     //wallpapersSearchList.clear();
+  //     wallpapersSearchList.assignAll(data.photos);
+  //     return data.photos;
+  //   } catch (e) {
+  //     print("Error fetching wallpapers for category: $e");
+  //     return [];
+  //   }
+  // }
+
+  Future<List<Photo>> fetchWallpapersSearch1(String query) async {
+    const maxRetries = 3;
+    int retryDelaySeconds = 2;
+
+    for (int retryCount = 0; retryCount < maxRetries; retryCount++) {
+      try {
+        final response = await Dio().get(
+          '$_baseUrl/search?query=$query&per_page=50',
+          options: Options(
+            headers: {"Authorization": _apikey},
+          ),
+        );
+
+        final data = PexelsResponse.fromJson(response.data);
+        wallpapersSearchList.clear();
+        wallpapersSearchList.assignAll(data.photos);
+
+        return data.photos;
+      } catch (e) {
+        print("Error fetching wallpapers for category: $e");
+
+        if (e is DioError && e.response?.statusCode == 429) {
+          print(
+              'Received 429 status code. Retrying after $retryDelaySeconds seconds.');
+          await Future.delayed(Duration(seconds: retryDelaySeconds));
+          retryDelaySeconds *= 2; // Exponential backoff
+        } else {
+          return [];
+        }
+      }
     }
+
+    print(
+        'Exceeded maximum retries for fetching wallpapers for category $query.');
+    return [];
   }
+
+  // fetchWallpapersSearch1(String query) async {
+  //   try {
+  //     final response = await Dio().get(
+  //       '$_baseUrl/search?query=$query&per_page=20',
+  //       options: Options(
+  //         headers: {"Authorization": _apikey},
+  //       ),
+  //     );
+
+  //     final data = PexelsResponse.fromJson(response.data);
+  //     print(
+  //         'WallpapersSearch1 response: $data'); // Add this line to print the response
+  //     wallpapersSearchList.clear();
+  //     wallpapersSearchList.assignAll(data.photos);
+
+  //     print(
+  //         'WallpapersSearchList length after fetch: ${wallpapersSearchList.length}');
+  //   } catch (e) {
+  //     print("Error fetching wallpapers for category: $e");
+  //   }
+  // }
 
   void fetchWallpapersForCategories1() async {
     List<String> categoryNameList = [
       "Cars",
-      "Nature",
-      "Bikes",
-      "Street",
-      "City",
       "Flowers",
+      "Nature",
+      "Travel",
+      'Girl',
+      'Love',
+      "Bikes",
+      "City",
+      "Abstract",
+      "Minimalist",
+      "Technology",
+      "Space",
+      "Animals",
+      "Gaming",
+      "Vintage",
+      "Sports",
+      "Street",
       "Laptop",
       'Coding',
-      'Girl',
-      'Computer'
+      'Dark',
+      'Computer',
     ];
 
     categoryModelList.clear();

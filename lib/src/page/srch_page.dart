@@ -23,7 +23,7 @@ class SearchPage extends StatelessWidget {
               child: GetBuilder<WallpaperController>(
                 builder: (controller) => TextField(
                   cursorColor: Colors.black,
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                   onChanged: (query) {
                     // Update the search query in the controller
                     controller.updateSearchQuery(query);
@@ -54,14 +54,14 @@ class SearchPage extends StatelessWidget {
         ),
         elevation: 0,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 10,
-            ),
-            WellpaperSearchComponent(),
-          ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              WellpaperSearchComponent(),
+            ],
+          ),
         ),
       ),
     );

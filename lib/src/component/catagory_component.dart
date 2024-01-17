@@ -28,7 +28,8 @@ class CatagpryComponent extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   final category = controller.categoryModelList[index];
                   return InkWell(
-                    onTap: () {
+                    onTap: () async {
+                      await controller.fetchWallpapersSearch1(category.catName);
                       Get.to(CategoryPage(categoryModel: category));
                     },
                     child: Padding(

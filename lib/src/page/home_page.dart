@@ -17,10 +17,15 @@ class HomePage extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           backgroundColor: Colors.white,
           title: const Text(
-            'NatureWalls  Nature Wallpaper',
-            style: TextStyle(color: Colors.black, fontSize: 18),
+            'Uzzal Wallpaper',
+            style: TextStyle(
+              color: Colors.pink,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           actions: [
             IconButton(
@@ -31,6 +36,7 @@ class HomePage extends StatelessWidget {
               },
               icon: Icon(
                 Icons.search,
+                // color: Colors.pink,
               ),
             ),
           ],
@@ -39,25 +45,24 @@ class HomePage extends StatelessWidget {
           ),
           elevation: 0,
           bottom: const TabBar(
-            indicatorColor: Colors.blue,
-            labelColor: Colors.blue,
+            indicatorColor: Colors.pink,
+            labelColor: Colors.pink,
             unselectedLabelColor: Colors.black,
-            isScrollable: true,
+            // isScrollable: true,
             tabs: [
               Tab(text: 'POPULAR'),
-              Tab(text: ' CATEGORIES'),
+              Tab(text: 'CATEGORIES'),
               Tab(text: 'FAVORITES'),
             ],
           ),
         ),
-        drawer: const Drawer(),
+        drawer: Drawer(),
         body: TabBarView(children: [
           WellpaperComponent(),
           CatagpryComponent(),
           Container(
             height: 300,
-            width: 200,
-            color: Colors.green,
+            color: Colors.pink,
             child: Center(
                 child: Text(
               '3 number ',
