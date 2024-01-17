@@ -39,7 +39,9 @@ dependencies:
   image_gallery_saver: ^2.0.3
   loop_page_view: ^1.2.5
   dio:
-  wallpaper_manager_flutter: ^0.0.2
+  flutter_wallpaper_manager: ^0.0.4
+  flutter_cache_manager:
+  
   
 
 dev_dependencies:
