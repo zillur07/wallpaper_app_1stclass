@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 class WellpaperCategoryListComponent extends StatelessWidget {
   final WallpaperController controller = Get.find();
 
+  WellpaperCategoryListComponent({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

@@ -72,7 +72,7 @@ class CatagpryComponent extends StatelessWidget {
                                 child: Text(
                                   category.catName,
                                   style: TextStyle(
-                                      fontSize: 25, color: Colors.white),
+                                      fontSize: 20, color: Colors.white),
                                 ),
                               ),
                             ),

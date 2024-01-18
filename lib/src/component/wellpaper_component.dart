@@ -7,6 +7,8 @@ class WellpaperComponent extends StatelessWidget {
   // final WallpaperController controller = Get.find();
   final WallpaperController controller = Get.find();
 
+  WellpaperComponent({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -14,41 +16,46 @@ class WellpaperComponent extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Obx(
-              () => GridView.builder(
-                shrinkWrap: true,
-                primary: false,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 6.0,
-                  mainAxisSpacing: 6.0,
-                  mainAxisExtent: 350.0,
-                ),
-                itemCount: controller.wallpapers.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final item = controller.wallpapers[index];
-                  return InkWell(
-                    onTap: () {
-                      Get.to(
-                        SinglePage(
-                          initialPageIndex: index,
-                          wallpaperData:
-                              controller.wallpapers, // Pass the wallpaper data
-                        ),
-                      );
-                    },
-                    child: Container(
-                      decoration:
-                          BoxDecoration(borderRadius: BorderRadius.circular(8)),
-                      child: Image.network(
-                        item.src.medium,
-                        fit: BoxFit.cover,
+            controller.wallpapers.isEmpty
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Obx(
+                    () => GridView.builder(
+                      shrinkWrap: true,
+                      primary: false,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 6.0,
+                        mainAxisSpacing: 6.0,
+                        mainAxisExtent: 350.0,
                       ),
+                      itemCount: controller.wallpapers.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final item = controller.wallpapers[index];
+                        return InkWell(
+                          onTap: () {
+                            Get.to(
+                              SinglePage(
+                                initialPageIndex: index,
+                                wallpaperData: controller
+                                    .wallpapers, // Pass the wallpaper data
+                              ),
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8)),
+                            child: Image.network(
+                              item.src.medium,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        );
+                      },
                     ),
-                  );
-                },
-              ),
-            ),
+                  ),
           ],
         ),
       ),

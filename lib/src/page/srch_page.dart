@@ -23,14 +23,14 @@ class SearchPage extends StatelessWidget {
               child: GetBuilder<WallpaperController>(
                 builder: (controller) => TextField(
                   cursorColor: Colors.black,
-                  style: TextStyle(color: Colors.black),
+                  style: const TextStyle(color: Colors.black),
                   onChanged: (query) {
                     // Update the search query in the controller
                     controller.updateSearchQuery(query);
                   },
                   decoration: InputDecoration(
                     suffixIcon: IconButton(
-                      icon: Icon(Icons.search),
+                      icon: const Icon(Icons.search),
                       onPressed: () {
                         // Trigger the search
                         controller.fetchWallpapersSearch();

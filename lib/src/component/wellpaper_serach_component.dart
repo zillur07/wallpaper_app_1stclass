@@ -7,6 +7,8 @@ class WellpaperSearchComponent extends StatelessWidget {
   // final WallpaperController controller = Get.find();
   final WallpaperController controller = Get.find();
 
+  WellpaperSearchComponent({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

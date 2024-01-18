@@ -13,7 +13,8 @@ class CategoryPage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           categoryModel.catName,
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.pink),
+          style:
+              const TextStyle(fontWeight: FontWeight.bold, color: Colors.pink),
         ),
         actions: [],
         iconTheme: const IconThemeData(
@@ -40,14 +41,14 @@ class CategoryPage extends StatelessWidget {
                 top: 40,
                 child: Column(
                   children: [
-                    Text("Category",
+                    const Text("Category",
                         style: TextStyle(
                             fontSize: 15,
                             color: Colors.white,
                             fontWeight: FontWeight.w300)),
                     Text(
                       categoryModel.catName,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 30,
                           color: Colors.white,
                           fontWeight: FontWeight.w600),
@@ -61,7 +62,7 @@ class CategoryPage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: ListView(
-                padding: EdgeInsets.only(top: 5),
+                padding: const EdgeInsets.only(top: 5),
                 shrinkWrap: true,
                 primary: false,
                 children: [

@@ -43,7 +43,7 @@ class WallpaperController extends GetxController {
       final data = PexelsResponse.fromJson(response.data);
       wallpapers.assignAll(data.photos);
 
-      print(data.photos);
+      // print(data.photos);
     } catch (e) {
       print("Error fetching wallpapers: $e");
     }
@@ -64,7 +64,7 @@ class WallpaperController extends GetxController {
       final data = PexelsResponse.fromJson(response.data);
       wallpapersPopular.assignAll(data.photos);
 
-      print(data.photos);
+      // print(data.photos);
     } catch (e) {
       print("Error fetching wallpapers: $e");
     }
@@ -84,7 +84,7 @@ class WallpaperController extends GetxController {
     try {
       // Use the stored search query from the controller
       final response = await Dio().get(
-        '$_baseUrl/search?query=${currentSearchQuery}&per_page=50&page=$randomNumber',
+        '$_baseUrl/search?query=$currentSearchQuery&per_page=50&page=$randomNumber',
         options: Options(
           headers: {"Authorization": _apikey},
         ),
@@ -93,7 +93,7 @@ class WallpaperController extends GetxController {
       wallpapersSearchList.clear();
       wallpapersSearchList.assignAll(data.photos);
 
-      print(data.photos);
+      //print(data.photos);
     } catch (e) {
       print("Error fetching wallpapers: $e");
     }
@@ -210,8 +210,8 @@ class WallpaperController extends GetxController {
       List<Photo> photos = await fetchWallpapersSearch1(categoryName);
 
       if (photos.isNotEmpty) {
-        final _random = Random();
-        int randomIndex = _random.nextInt(photos.length);
+        final random = Random();
+        int randomIndex = random.nextInt(photos.length);
         Photo photo = photos[randomIndex];
 
         categoryModelList.add(CategoryModel(

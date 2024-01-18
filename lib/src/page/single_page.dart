@@ -9,8 +9,6 @@ import 'package:get/get.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:loop_page_view/loop_page_view.dart';
 
-import 'dart:typed_data';
-
 enum WallpaperType {
   SetWallpaper,
   SetLockWallpaper,
@@ -148,7 +146,7 @@ class _SinglePageState extends State<SinglePage> {
       backgroundColor: Colors.transparent,
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Wallpaper',
           style: TextStyle(fontWeight: FontWeight.w600, color: Colors.pink),
         ),
@@ -192,7 +190,7 @@ class _SinglePageState extends State<SinglePage> {
                                       style: TextStyle(
                                           fontSize: 18, color: Colors.white),
                                     ),
-                                    SizedBox(height: 20),
+                                    const SizedBox(height: 20),
                                     InkWell(
                                       onTap: () {
                                         setWallpaper(
@@ -229,7 +227,7 @@ class _SinglePageState extends State<SinglePage> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 15,
                                     ),
                                     InkWell(
@@ -267,7 +265,7 @@ class _SinglePageState extends State<SinglePage> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 15,
                                     ),
                                     InkWell(
@@ -363,7 +361,7 @@ class _SinglePageState extends State<SinglePage> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 10,
                                     ),
                                   ],
@@ -372,7 +370,7 @@ class _SinglePageState extends State<SinglePage> {
                       ),
                     );
                   },
-                  child: Container(
+                  child: SizedBox(
                     height: Get.height,
                     width: Get.width,
                     child: Image.network(
