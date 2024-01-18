@@ -1,4 +1,3 @@
-import 'package:app_name/src/component/ename.dart';
 import 'package:app_name/src/model/wallpaper.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';

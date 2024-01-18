@@ -10,15 +10,12 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-// Get the AuthController instance
-// Get the AuthController instance
-
   @override
   void initState() {
     super.initState();
-    // Load the main screen after a delay
-    Timer(Duration(seconds: 3), () {
-      Get.off(() => HomePage());
+
+    Timer(const Duration(seconds: 3), () {
+      Get.off(() => const HomePage());
     });
   }
 
@@ -26,14 +23,14 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     // Set the status bar color to match your splash screen background color.
     SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+      const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
     );
 
     return Scaffold(
       body: Container(
         width: Get.width,
         height: Get.height,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
               'img/sp.png',

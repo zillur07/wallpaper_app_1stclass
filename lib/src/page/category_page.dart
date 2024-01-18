@@ -1,10 +1,6 @@
 import 'package:app_name/src/component/wellpaper_category_list_component.dart';
-import 'package:app_name/src/component/wellpaper_serach_component.dart';
-import 'package:app_name/src/controllers/wallpaper_controller.dart';
 import 'package:app_name/src/model/catagory.dart';
-
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class CategoryPage extends StatelessWidget {
   final CategoryModel categoryModel;
