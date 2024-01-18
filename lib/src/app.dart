@@ -3,6 +3,8 @@ import 'package:app_name/src/page/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'page/splash_page.dart';
+
 class App extends StatelessWidget {
   const App({super.key});
 
@@ -11,7 +13,7 @@ class App extends StatelessWidget {
     Get.put(WallpaperController());
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: SplashScreen(),
     );
   }
 }
