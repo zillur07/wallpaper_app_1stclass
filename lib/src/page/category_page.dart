@@ -40,7 +40,7 @@ class CategoryPage extends StatelessWidget {
                 color: Colors.black38,
               ),
               Positioned(
-                left: 120,
+                left: 150,
                 top: 40,
                 child: Column(
                   children: [

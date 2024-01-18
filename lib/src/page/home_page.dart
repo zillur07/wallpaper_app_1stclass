@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:app_name/src/component/catagory_component.dart';
+import 'package:app_name/src/component/wellpaper__popular_component.dart';
 import 'package:app_name/src/component/wellpaper_component.dart';
 import 'package:app_name/src/page/srch_page.dart';
 
@@ -50,9 +51,9 @@ class HomePage extends StatelessWidget {
             unselectedLabelColor: Colors.black,
             // isScrollable: true,
             tabs: [
-              Tab(text: 'POPULAR'),
+              Tab(text: 'HOME'),
               Tab(text: 'CATEGORIES'),
-              Tab(text: 'FAVORITES'),
+              Tab(text: 'POPULAR'),
             ],
           ),
         ),
@@ -60,15 +61,7 @@ class HomePage extends StatelessWidget {
         body: TabBarView(children: [
           WellpaperComponent(),
           CatagpryComponent(),
-          Container(
-            height: 300,
-            color: Colors.pink,
-            child: Center(
-                child: Text(
-              '3 number ',
-              style: TextStyle(fontSize: 30),
-            )),
-          ),
+          WellpaperPopularComponent(),
         ]),
       ),
     );

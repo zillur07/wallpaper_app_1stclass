@@ -11,6 +11,7 @@ class WallpaperController extends GetxController {
   static const String _baseUrl = "https://api.pexels.com/v1";
 
   final RxList<Photo> wallpapers = <Photo>[].obs;
+  final RxList<Photo> wallpapersPopular = <Photo>[].obs;
   final RxList<Photo> wallpapersSearchList = <Photo>[].obs;
   final RxList<CategoryModel> categoryModelList = <CategoryModel>[].obs;
 
@@ -20,6 +21,7 @@ class WallpaperController extends GetxController {
   @override
   void onInit() {
     fetchWallpapers();
+    fetchWallpapersPopuler();
     fetchWallpapersForCategories1();
 
     fetchWallpapersSearch();
@@ -27,15 +29,40 @@ class WallpaperController extends GetxController {
   }
 
   void fetchWallpapers() async {
+    Random random = Random();
+
+    // Generate a random integer
+    int randomNumber = random.nextInt(100);
     try {
       final response = await Dio().get(
-        '$_baseUrl/curated?per_page=100',
+        '$_baseUrl/curated?per_page=100&page=$randomNumber',
         options: Options(
           headers: {"Authorization": _apikey},
         ),
       );
       final data = PexelsResponse.fromJson(response.data);
       wallpapers.assignAll(data.photos);
+
+      print(data.photos);
+    } catch (e) {
+      print("Error fetching wallpapers: $e");
+    }
+  }
+
+  void fetchWallpapersPopuler() async {
+    Random random = Random();
+
+    // Generate a random integer
+    int randomNumber = random.nextInt(100);
+    try {
+      final response = await Dio().get(
+        '$_baseUrl/curated?per_page=100&page=$randomNumber',
+        options: Options(
+          headers: {"Authorization": _apikey},
+        ),
+      );
+      final data = PexelsResponse.fromJson(response.data);
+      wallpapersPopular.assignAll(data.photos);
 
       print(data.photos);
     } catch (e) {
@@ -50,10 +77,14 @@ class WallpaperController extends GetxController {
   }
 
   void fetchWallpapersSearch() async {
+    Random random = Random();
+
+    // Generate a random integer
+    int randomNumber = random.nextInt(100);
     try {
       // Use the stored search query from the controller
       final response = await Dio().get(
-        '$_baseUrl/search?query=${currentSearchQuery}&per_page=50&page=1',
+        '$_baseUrl/search?query=${currentSearchQuery}&per_page=50&page=$randomNumber',
         options: Options(
           headers: {"Authorization": _apikey},
         ),
@@ -93,9 +124,13 @@ class WallpaperController extends GetxController {
     int retryDelaySeconds = 2;
 
     for (int retryCount = 0; retryCount < maxRetries; retryCount++) {
+      Random random = Random();
+
+      // Generate a random integer
+      int randomNumber = random.nextInt(100);
       try {
         final response = await Dio().get(
-          '$_baseUrl/search?query=$query&per_page=50',
+          '$_baseUrl/search?query=$query&per_page=$randomNumber',
           options: Options(
             headers: {"Authorization": _apikey},
           ),
@@ -152,16 +187,13 @@ class WallpaperController extends GetxController {
       "Cars",
       "Flowers",
       'Birds',
-      'Fish',
       "Nature",
       "Travel",
       'Girl',
       'Love',
-      "Bikes",
       "City",
       "Abstract",
       "Minimalist",
-      "Technology",
       "Space",
       "Animals",
       "Gaming",
@@ -169,10 +201,7 @@ class WallpaperController extends GetxController {
       "Sports",
       "Street",
       "Laptop",
-      'Coding',
       'Dark',
-      'Computer',
-      'Phone'
     ];
 
     categoryModelList.clear();
