@@ -37,12 +37,16 @@ class WellpaperCategoryListComponent extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Container(
-                    decoration:
-                        BoxDecoration(borderRadius: BorderRadius.circular(8)),
-                    child: Image.network(
-                      item.src.medium,
-                      fit: BoxFit.cover,
+                  child: Hero(
+                    tag: 'heroTag_$index', // Use a unique tag
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Image.network(
+                        item.src.medium,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 );

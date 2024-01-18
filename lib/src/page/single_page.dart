@@ -34,9 +34,9 @@ class _SinglePageState extends State<SinglePage> {
     currentPageIndex = widget.initialPageIndex;
   }
 
-  Future<void> _downloadImage(int imageItem) async {
+  Future<void> _downloadImage(int photoIndex) async {
     try {
-      Photo wallpaper = widget.wallpaperData[imageItem];
+      Photo wallpaper = widget.wallpaperData[photoIndex];
 
       dio.Response<List<int>> response = await dio.Dio().get<List<int>>(
         wallpaper.src.original,
@@ -51,19 +51,8 @@ class _SinglePageState extends State<SinglePage> {
       );
 
       if (result['isSuccess']) {
-        Get.showSnackbar(
-          const GetSnackBar(
-            backgroundColor: Colors.pink,
-            snackPosition: SnackPosition.TOP,
-            title: 'Download successfully ',
-            message: 'Image saved Successfully',
-            icon: Icon(
-              Icons.download,
-              color: Colors.white,
-            ),
-            duration: Duration(seconds: 3),
-          ),
-        );
+        _showSuccessSnackbar(
+            'Download successfully', 'Image saved Successfully');
       } else {
         print('Failed to save image: ${result['error']}');
       }
@@ -125,274 +114,212 @@ class _SinglePageState extends State<SinglePage> {
 
       Get.back();
 
-      Get.showSnackbar(
-        const GetSnackBar(
-          backgroundColor: Colors.pink,
-          snackPosition: SnackPosition.TOP,
-          title: ' Set Wallpaper successfully ',
-          message: ' Wallpaper Set Successfully',
-          icon: Icon(
-            Icons.image_rounded,
-            color: Colors.white,
-            size: 35,
-          ),
-          duration: Duration(seconds: 3),
-        ),
-      );
+      _showSuccessSnackbar(
+          'Set Wallpaper successfully', 'Wallpaper Set Successfully');
     }
+  }
+
+  void _showSuccessSnackbar(String? title, String message) {
+    Get.showSnackbar(
+      GetSnackBar(
+        backgroundColor: Colors.pink,
+        snackPosition: SnackPosition.TOP,
+        title: title,
+        message: message,
+        icon: Icon(
+          Icons.image_rounded,
+          color: Colors.white,
+          size: 35,
+        ),
+        duration: Duration(seconds: 3),
+      ),
+    );
   }
 
   void onPageChanged(int index) {
     currentPageIndex = index;
   }
 
+  AppBar _buildAppBar() {
+    return AppBar(
+      centerTitle: true,
+      title: const Text(
+        'Wallpaper',
+        style: TextStyle(fontWeight: FontWeight.w600, color: Colors.pink),
+      ),
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      actions: [
+        IconButton(
+          onPressed: () => _showBottomSheet(),
+          icon: Icon(
+            Icons.file_download_outlined,
+            size: 26,
+          ),
+        ),
+        SizedBox(
+          width: 10,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildCircularProgressIndicator() {
+    return const CircularProgressIndicator(
+      valueColor: AlwaysStoppedAnimation<Color>(Colors.pink),
+    );
+  }
+
+  Widget _buildBottomSheetContent(int index) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 20),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            height: 5,
+            width: 90,
+            decoration: BoxDecoration(
+                color: Colors.black54, borderRadius: BorderRadius.circular(5)),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          const Text(
+            'What would you like to do?',
+            style: TextStyle(
+              fontSize: 18,
+            ),
+          ),
+          const SizedBox(height: 20),
+          InkWell(
+            onTap: () => setWallpaper(WallpaperType.SetWallpaper, index),
+            child: _buildActionContainer(
+              Icons.image_outlined,
+              'SET WALLPAPER',
+            ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          InkWell(
+            onTap: () => setWallpaper(WallpaperType.SetLockWallpaper, index),
+            child: _buildActionContainer(
+              Icons.lock_outline_rounded,
+              'SET LOCK SCREEN',
+            ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          InkWell(
+            onTap: () => setWallpaper(WallpaperType.SetBoth, index),
+            child: _buildActionContainer(
+              Icons.photo_size_select_actual_outlined,
+              'SET BOTH SCREEN',
+            ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          InkWell(
+            onTap: () => _downloadImage(index),
+            child: _buildActionContainer(
+              Icons.file_download_outlined,
+              'SAVE TO MEDIA FOLDER',
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildActionContainer(IconData icon, String label) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.pink),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showBottomSheet() {
+    Get.bottomSheet(
+      Container(
+        width: Get.width,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+        ),
+        child: _settingWallpaper
+            ? _buildCircularProgressIndicator()
+            : _buildBottomSheetContent(currentPageIndex),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          'Wallpaper',
-          style: TextStyle(fontWeight: FontWeight.w600, color: Colors.pink),
-        ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.file_download_outlined,
-            ),
-          ),
-        ],
-      ),
+      appBar: _buildAppBar(),
       extendBodyBehindAppBar: true,
       body: Obx(
         () => LoopPageView.builder(
           itemCount: widget.wallpaperData.length,
           onPageChanged: onPageChanged,
           controller: LoopPageController(initialPage: widget.initialPageIndex),
-          itemBuilder: (BuildContext context, int index) {
-            return Stack(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Get.bottomSheet(
-                      Container(
-                        width: Get.width,
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20),
-                          ),
-                        ),
-                        child: _settingWallpaper
-                            ? const CircularProgressIndicator(
-                                valueColor:
-                                    AlwaysStoppedAnimation<Color>(Colors.pink),
-                              )
-                            : Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 20,
-                                  right: 20,
-                                  top: 10,
-                                  bottom: 20,
-                                ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Container(
-                                      height: 5,
-                                      width: 90,
-                                      decoration: BoxDecoration(
-                                          color: Colors.black54,
-                                          borderRadius:
-                                              BorderRadius.circular(5)),
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    const Text(
-                                      'What would you like to do?',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 20),
-                                    InkWell(
-                                      onTap: () {
-                                        setWallpaper(
-                                            WallpaperType.SetWallpaper, index);
-                                      },
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            border:
-                                                Border.all(color: Colors.pink)),
-                                        child: const Padding(
-                                          padding: EdgeInsets.all(10.0),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.image_outlined,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text(
-                                                'SET WALLPAPER',
-                                                style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 15,
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        setWallpaper(
-                                            WallpaperType.SetLockWallpaper,
-                                            index);
-                                      },
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            border:
-                                                Border.all(color: Colors.pink)),
-                                        child: const Padding(
-                                          padding: EdgeInsets.all(10.0),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.lock_outline_rounded,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text(
-                                                'SET LOCK SCREEN',
-                                                style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 15,
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        setWallpaper(
-                                            WallpaperType.SetBoth, index);
-                                      },
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            border:
-                                                Border.all(color: Colors.pink)),
-                                        child: const Padding(
-                                          padding: EdgeInsets.all(10.0),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.image_search_sharp,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text(
-                                                'SET BOTH SCREEN',
-                                                style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 15,
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        _downloadImage(index);
-                                      },
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            border:
-                                                Border.all(color: Colors.pink)),
-                                        child: const Padding(
-                                          padding: EdgeInsets.all(10.0),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.file_download_outlined,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text(
-                                                'SAVE TO MEDIA FOLDER',
-                                                style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                      ),
-                    );
-                  },
-                  child: SizedBox(
-                    height: Get.height,
-                    width: Get.width,
-                    child: Image.network(
-                      widget.wallpaperData[index].src.large2x,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ],
-            );
-          },
+          itemBuilder: _buildPageItem,
         ),
       ),
+    );
+  }
+
+  Widget _buildPageItem(BuildContext context, int index) {
+    return Stack(
+      children: [
+        GestureDetector(
+          onTap: () => _showBottomSheet(),
+          child: Hero(
+            tag: 'heroTag_$index', // Use the same tag
+            child: SizedBox(
+              height: Get.height,
+              width: Get.width,
+              child: Image.network(
+                widget.wallpaperData[index].src.large2x,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class WellpaperComponent extends StatelessWidget {
-  // final WallpaperController controller = Get.find();
   final WallpaperController controller = Get.find();
 
   WellpaperComponent({super.key});
@@ -45,20 +44,25 @@ class WellpaperComponent extends StatelessWidget {
                         final item = controller.wallpapers[index];
                         return InkWell(
                           onTap: () {
-                            Get.to(
-                              SinglePage(
-                                initialPageIndex: index,
-                                wallpaperData: controller
-                                    .wallpapers, // Pass the wallpaper data
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => SinglePage(
+                                  initialPageIndex: index,
+                                  wallpaperData: controller.wallpapers,
+                                ),
                               ),
                             );
                           },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8)),
-                            child: Image.network(
-                              item.src.medium,
-                              fit: BoxFit.cover,
+                          child: Hero(
+                            tag: 'heroTag_$index', // Use a unique tag
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Image.network(
+                                item.src.medium,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         );
