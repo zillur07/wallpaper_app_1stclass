@@ -124,13 +124,13 @@ class WallpaperController extends GetxController {
     int retryDelaySeconds = 2;
 
     for (int retryCount = 0; retryCount < maxRetries; retryCount++) {
-      Random random = Random();
+      // Random random = Random();
 
-      // Generate a random integer
-      int randomNumber = random.nextInt(3);
+      // // Generate a random integer
+      // int randomNumber = random.nextInt(3);
       try {
         final response = await Dio().get(
-          '$_baseUrl/search?query=$query&per_page=$randomNumber',
+          '$_baseUrl/search?query=$query&per_page=50',
           options: Options(
             headers: {"Authorization": _apikey},
           ),
