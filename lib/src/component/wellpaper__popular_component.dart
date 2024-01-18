@@ -17,8 +17,17 @@ class WellpaperPopularComponent extends StatelessWidget {
         child: Column(
           children: [
             controller.wallpapersPopular.isEmpty
-                ? Center(
-                    child: CircularProgressIndicator(),
+                ? Column(
+                    children: [
+                      SizedBox(
+                        height: 270,
+                      ),
+                      Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.pink,
+                        ),
+                      ),
+                    ],
                   )
                 : Obx(
                     () => GridView.builder(

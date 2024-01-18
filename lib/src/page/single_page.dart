@@ -47,6 +47,7 @@ class _SinglePageState extends State<SinglePage> {
       if (result['isSuccess']) {
         Get.showSnackbar(
           const GetSnackBar(
+            backgroundColor: Colors.pink,
             snackPosition: SnackPosition.TOP,
             title: 'Download successfully ',
             message: 'Image saved Successfully',
@@ -120,12 +121,14 @@ class _SinglePageState extends State<SinglePage> {
 
       Get.showSnackbar(
         const GetSnackBar(
+          backgroundColor: Colors.pink,
           snackPosition: SnackPosition.TOP,
-          title: 'Set Wellpaper successfully ',
-          message: 'Wellpaper Set Successfully',
+          title: ' Set Wellpaper successfully ',
+          message: ' Wellpaper Set Successfully',
           icon: Icon(
-            Icons.download,
+            Icons.image_rounded,
             color: Colors.white,
+            size: 35,
           ),
           duration: Duration(seconds: 3),
         ),
@@ -169,7 +172,7 @@ class _SinglePageState extends State<SinglePage> {
                       Container(
                         width: Get.width,
                         decoration: const BoxDecoration(
-                          color: Colors.black,
+                          color: Colors.white,
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(20),
                             topRight: Radius.circular(20),
@@ -181,14 +184,31 @@ class _SinglePageState extends State<SinglePage> {
                                     AlwaysStoppedAnimation<Color>(Colors.pink),
                               )
                             : Padding(
-                                padding: const EdgeInsets.all(20.0),
+                                padding: const EdgeInsets.only(
+                                  left: 20,
+                                  right: 20,
+                                  top: 10,
+                                  bottom: 20,
+                                ),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
+                                    Container(
+                                      height: 5,
+                                      width: 90,
+                                      decoration: BoxDecoration(
+                                          color: Colors.black54,
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
                                     const Text(
                                       'What would you like to do?',
                                       style: TextStyle(
-                                          fontSize: 18, color: Colors.white),
+                                        fontSize: 18,
+                                      ),
                                     ),
                                     const SizedBox(height: 20),
                                     InkWell(
@@ -210,7 +230,6 @@ class _SinglePageState extends State<SinglePage> {
                                             children: [
                                               Icon(
                                                 Icons.image_outlined,
-                                                color: Colors.white,
                                               ),
                                               SizedBox(
                                                 width: 10,
@@ -218,9 +237,9 @@ class _SinglePageState extends State<SinglePage> {
                                               Text(
                                                 'SET WALLPAPER',
                                                 style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: Colors.white),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
                                               ),
                                             ],
                                           ),
@@ -248,17 +267,18 @@ class _SinglePageState extends State<SinglePage> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              Icon(Icons.lock_outline_rounded,
-                                                  color: Colors.white),
+                                              Icon(
+                                                Icons.lock_outline_rounded,
+                                              ),
                                               SizedBox(
                                                 width: 10,
                                               ),
                                               Text(
                                                 'SET LOCK SCREEN',
                                                 style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: Colors.white),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
                                               ),
                                             ],
                                           ),
@@ -285,17 +305,18 @@ class _SinglePageState extends State<SinglePage> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              Icon(Icons.image_search_sharp,
-                                                  color: Colors.white),
+                                              Icon(
+                                                Icons.image_search_sharp,
+                                              ),
                                               SizedBox(
                                                 width: 10,
                                               ),
                                               Text(
                                                 'SET BOTH SCREEN',
                                                 style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: Colors.white),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
                                               ),
                                             ],
                                           ),
@@ -344,17 +365,18 @@ class _SinglePageState extends State<SinglePage> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              Icon(Icons.file_download_outlined,
-                                                  color: Colors.white),
+                                              Icon(
+                                                Icons.file_download_outlined,
+                                              ),
                                               SizedBox(
                                                 width: 10,
                                               ),
                                               Text(
                                                 'SAVE TO MEDIA FOLDER',
                                                 style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: Colors.white),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
                                               ),
                                             ],
                                           ),
