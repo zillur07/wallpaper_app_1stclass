@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_wallpaper_manager/flutter_wallpaper_manager.dart';
 import 'package:get/get.dart';
-
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:loop_page_view/loop_page_view.dart';
 
@@ -17,7 +16,7 @@ enum WallpaperType {
 
 class SinglePage extends StatefulWidget {
   final List<Photo> wallpaperData;
-  late final int initialPageIndex;
+  final int initialPageIndex;
 
   SinglePage({required this.wallpaperData, required this.initialPageIndex});
 
@@ -26,7 +25,14 @@ class SinglePage extends StatefulWidget {
 }
 
 class _SinglePageState extends State<SinglePage> {
+  int currentPageIndex = 0;
   bool _settingWallpaper = false;
+
+  @override
+  void initState() {
+    super.initState();
+    currentPageIndex = widget.initialPageIndex;
+  }
 
   Future<void> _downloadImage(int imageItem) async {
     try {
@@ -123,8 +129,8 @@ class _SinglePageState extends State<SinglePage> {
         const GetSnackBar(
           backgroundColor: Colors.pink,
           snackPosition: SnackPosition.TOP,
-          title: ' Set Wellpaper successfully ',
-          message: ' Wellpaper Set Successfully',
+          title: ' Set Wallpaper successfully ',
+          message: ' Wallpaper Set Successfully',
           icon: Icon(
             Icons.image_rounded,
             color: Colors.white,
@@ -137,10 +143,7 @@ class _SinglePageState extends State<SinglePage> {
   }
 
   void onPageChanged(int index) {
-    // Update the initialPageIndex when the page is changed
-    setState(() {
-      widget.initialPageIndex = index;
-    });
+    currentPageIndex = index;
   }
 
   @override
@@ -155,12 +158,19 @@ class _SinglePageState extends State<SinglePage> {
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.file_download_outlined,
+            ),
+          ),
+        ],
       ),
       extendBodyBehindAppBar: true,
       body: Obx(
         () => LoopPageView.builder(
           itemCount: widget.wallpaperData.length,
-          // onPageChanged: (index) {},
           onPageChanged: onPageChanged,
           controller: LoopPageController(initialPage: widget.initialPageIndex),
           itemBuilder: (BuildContext context, int index) {
@@ -326,29 +336,6 @@ class _SinglePageState extends State<SinglePage> {
                                     const SizedBox(
                                       height: 15,
                                     ),
-                                    // Container(
-                                    //   decoration: BoxDecoration(
-                                    //     borderRadius: BorderRadius.circular(12),
-                                    //     color: Colors.black,
-                                    //   ),
-                                    //   child: _settingWallpaper
-                                    //       ? CircularProgressIndicator(
-                                    //           valueColor:
-                                    //               AlwaysStoppedAnimation<Color>(
-                                    //                   Colors.pink),
-                                    //         )
-                                    //       : IconButton(
-                                    //           onPressed: () {
-                                    //             _downloadImage(index);
-                                    //           },
-                                    //           icon: Icon(
-                                    //             Icons.download,
-                                    //             color: Colors.white,
-                                    //             size: 30,
-                                    //           ),
-                                    //         ),
-                                    // ),
-
                                     InkWell(
                                       onTap: () {
                                         _downloadImage(index);
@@ -401,32 +388,6 @@ class _SinglePageState extends State<SinglePage> {
                     ),
                   ),
                 ),
-                // Positioned(
-                //   bottom: 15,
-                //   left: 130,
-                //   right: 130,
-                //   child: Container(
-                //     decoration: BoxDecoration(
-                //       borderRadius: BorderRadius.circular(12),
-                //       color: Colors.black,
-                //     ),
-                //     child: _settingWallpaper
-                //         ? CircularProgressIndicator(
-                //             valueColor:
-                //                 AlwaysStoppedAnimation<Color>(Colors.white),
-                //           )
-                //         : IconButton(
-                //             onPressed: () {
-                //               _downloadImage(index);
-                //             },
-                //             icon: Icon(
-                //               Icons.download,
-                //               color: Colors.white,
-                //               size: 30,
-                //             ),
-                //           ),
-                //   ),
-                // )
               ],
             );
           },
