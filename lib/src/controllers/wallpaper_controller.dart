@@ -127,7 +127,7 @@ class WallpaperController extends GetxController {
       Random random = Random();
 
       // Generate a random integer
-      int randomNumber = random.nextInt(10);
+      int randomNumber = random.nextInt(20);
       try {
         final response = await Dio().get(
           '$_baseUrl/search?query=$query&per_page=60&page=$randomNumber',
