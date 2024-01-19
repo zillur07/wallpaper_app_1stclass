@@ -62,7 +62,7 @@ class WellpaperCategoryListComponent extends StatelessWidget {
                           fit: BoxFit.cover,
                           placeholder: (BuildContext context, String url) =>
                               Container(
-                            color: Colors.pink.shade200,
+                            color: Colors.pinkAccent,
                           ),
                         ),
                       ),

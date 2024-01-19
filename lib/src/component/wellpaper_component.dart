@@ -85,7 +85,7 @@ class WellpaperComponent extends StatelessWidget {
                                   placeholder:
                                       (BuildContext context, String url) =>
                                           Container(
-                                    color: Colors.pink,
+                                    color: Colors.pinkAccent,
                                   ),
                                 ),
                               ),

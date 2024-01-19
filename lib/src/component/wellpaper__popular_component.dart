@@ -78,7 +78,7 @@ class WellpaperPopularComponent extends StatelessWidget {
                                   placeholder:
                                       (BuildContext context, String url) =>
                                           Container(
-                                    color: Colors.purple,
+                                    color: Colors.pinkAccent,
                                   ),
                                 ),
                               ),
