@@ -32,7 +32,7 @@ class WallpaperController extends GetxController {
     Random random = Random();
 
     // Generate a random integer
-    int randomNumber = random.nextInt(100);
+    int randomNumber = random.nextInt(200);
     try {
       final response = await Dio().get(
         '$_baseUrl/curated?per_page=100&page=$randomNumber',
@@ -53,7 +53,7 @@ class WallpaperController extends GetxController {
     Random random = Random();
 
     // Generate a random integer
-    int randomNumber = random.nextInt(100);
+    int randomNumber = random.nextInt(200);
     try {
       final response = await Dio().get(
         '$_baseUrl/curated?per_page=100&page=$randomNumber',
@@ -80,11 +80,11 @@ class WallpaperController extends GetxController {
     Random random = Random();
 
     // Generate a random integer
-    int randomNumber = random.nextInt(6);
+    int randomNumber = random.nextInt(10);
     try {
       // Use the stored search query from the controller
       final response = await Dio().get(
-        '$_baseUrl/search?query=$currentSearchQuery&per_page=50&page=$randomNumber',
+        '$_baseUrl/search?query=$currentSearchQuery&per_page=100&page=$randomNumber',
         options: Options(
           headers: {"Authorization": _apikey},
         ),
@@ -127,10 +127,10 @@ class WallpaperController extends GetxController {
       Random random = Random();
 
       // Generate a random integer
-      int randomNumber = random.nextInt(8);
+      int randomNumber = random.nextInt(10);
       try {
         final response = await Dio().get(
-          '$_baseUrl/search?query=$query&per_page=50&page=$randomNumber',
+          '$_baseUrl/search?query=$query&per_page=60&page=$randomNumber',
           options: Options(
             headers: {"Authorization": _apikey},
           ),

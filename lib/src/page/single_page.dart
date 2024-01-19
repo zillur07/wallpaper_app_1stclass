@@ -319,10 +319,11 @@ class _SinglePageState extends State<SinglePage> {
               // ),
 
               child: CachedNetworkImage(
-                imageUrl: widget.wallpaperData[index].src.large2x,
+                imageUrl: widget.wallpaperData[index].src.portrait,
                 fit: BoxFit.cover,
                 progressIndicatorBuilder: (context, url, progress) => Center(
                   child: CircularProgressIndicator(
+                    color: Colors.pink,
                     value: progress.progress,
                   ),
                 ),

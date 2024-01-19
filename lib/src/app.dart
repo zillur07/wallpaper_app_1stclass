@@ -12,6 +12,10 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(WallpaperController());
     return GetMaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        iconTheme: IconThemeData(color: Colors.pink), //<-- SEE HERE
+      ),
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
     );
