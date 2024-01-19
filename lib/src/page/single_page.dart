@@ -40,7 +40,7 @@ class _SinglePageState extends State<SinglePage> {
       Photo wallpaper = widget.wallpaperData[photoIndex];
 
       dio.Response<List<int>> response = await dio.Dio().get<List<int>>(
-        wallpaper.src.portrait,
+        wallpaper.src.large2x,
         options: dio.Options(responseType: dio.ResponseType.bytes),
       );
 
@@ -48,10 +48,11 @@ class _SinglePageState extends State<SinglePage> {
 
       var result = await ImageGallerySaver.saveImage(
         bytes,
-        quality: 80,
+        quality: 100,
       );
 
       if (result['isSuccess']) {
+        Get.back();
         _showSuccessSnackbar(
             'Download successfully', 'Image saved Successfully');
       } else {
