@@ -87,7 +87,7 @@ class _SinglePageState extends State<SinglePage> {
           break;
       }
 
-      String imageUrl = widget.wallpaperData[pageIndex].src.portrait;
+      String imageUrl = widget.wallpaperData[pageIndex].src.large2x;
 
       dio.Response<List<int>> response = await dio.Dio().get<List<int>>(
         imageUrl,
