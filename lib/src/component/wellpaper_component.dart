@@ -7,53 +7,45 @@ import 'package:get/get.dart';
 class WellpaperComponent extends StatelessWidget {
   final WallpaperController controller = Get.find();
 
-  WellpaperComponent({super.key});
+  WellpaperComponent({Key? key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            controller.wallpapers.isEmpty
-                ? Column(
-                    children: [
-                      SizedBox(
-                        height: 270,
-                      ),
-                      Center(
-                        child: CircularProgressIndicator(
-                          color: Colors.pink,
+    return GetBuilder<WallpaperController>(
+      builder: (controller) => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              controller.wallpapers.isEmpty
+                  ? const Column(
+                      children: [
+                        SizedBox(
+                          height: 270,
                         ),
-                      ),
-                    ],
-                  )
-                : Obx(
-                    () => GridView.builder(
+                        Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.pink,
+                          ),
+                        ),
+                      ],
+                    )
+                  : GridView.builder(
                       shrinkWrap: true,
                       primary: false,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        crossAxisSpacing: 6.0,
-                        mainAxisSpacing: 6.0,
+                        crossAxisSpacing: 2.0,
+                        mainAxisSpacing: 1.0,
                         mainAxisExtent: 350.0,
                       ),
                       itemCount: controller.wallpapers.length,
                       itemBuilder: (BuildContext context, int index) {
                         final item = controller.wallpapers[index];
-                        return InkWell(
+                        return GestureDetector(
                           onTap: () {
-                            // Navigator.of(context).push(
-                            //   MaterialPageRoute(
-                            //     builder: (context) => SinglePage(
-                            //       initialPageIndex: index,
-                            //       wallpaperData: controller.wallpapers,
-                            //     ),
-                            //   ),
-                            // );
                             Get.to(
                               SinglePage(
                                 initialPageIndex: index,
@@ -62,22 +54,16 @@ class WellpaperComponent extends StatelessWidget {
                               transition: Transition.native,
                             );
                           },
-                          child: Hero(
-                            tag: 'heroTag_$index', // Use a unique tag
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              // child: Image.network(
-                              //   item.src.medium,
-                              //   fit: BoxFit.cover,
-                              // ),
+                          child: Card(
+                            elevation: 4.0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Hero(
+                              tag: 'heroTag_$index', // Use a unique tag
                               child: ClipRRect(
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.circular(8),
-                                  bottomRight: Radius.circular(8),
-                                  topLeft: Radius.circular(8),
-                                  topRight: Radius.circular(8),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(8),
                                 ),
                                 child: CachedNetworkImage(
                                   imageUrl: item.src.medium,
@@ -94,8 +80,8 @@ class WellpaperComponent extends StatelessWidget {
                         );
                       },
                     ),
-                  ),
-          ],
+            ],
+          ),
         ),
       ),
     );
