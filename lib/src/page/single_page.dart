@@ -1,4 +1,5 @@
 import 'package:app_name/src/model/wallpaper.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -81,9 +82,22 @@ class SinglePage extends StatelessWidget {
               Container(
                 height: Get.height,
                 width: Get.width,
-                child: Image.network(
-                  wallpaperData[index].src.medium,
+                // child: Image.network(
+                //   wallpaperData[index].src.medium,
+                //   fit: BoxFit.cover,
+                // ),
+                child: CachedNetworkImage(
+                  imageUrl: wallpaperData[index].src.large2x,
                   fit: BoxFit.cover,
+                  // placeholder: (BuildContext context, String url) => Container(
+                  //   color: Colors.pink,
+                  // ),
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      Center(
+                    child: CircularProgressIndicator(
+                        value: downloadProgress.progress),
+                  ),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
               ),
               Positioned(

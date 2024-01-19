@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:app_name/src/component/catagory_component.dart';
+import 'package:app_name/src/component/wellpaper__popular_component.dart';
 import 'package:app_name/src/component/wellpaper_component.dart';
 import 'package:app_name/src/page/srch_page.dart';
 
@@ -39,28 +40,18 @@ class HomePage extends StatelessWidget {
             indicatorColor: Colors.blue,
             labelColor: Colors.blue,
             unselectedLabelColor: Colors.black,
-            isScrollable: true,
             tabs: [
-              Tab(text: 'POPULAR'),
+              Tab(text: 'Home'),
               Tab(text: ' CATEGORIES'),
-              Tab(text: 'FAVORITES'),
+              Tab(text: 'POPULAR'),
             ],
           ),
         ),
         drawer: const Drawer(),
         body: TabBarView(children: [
           WellpaperComponent(),
-          const CatagpryComponent(),
-          Container(
-            height: 300,
-            width: 200,
-            color: Colors.green,
-            child: Center(
-                child: Text(
-              '3 number ',
-              style: TextStyle(fontSize: 30),
-            )),
-          ),
+          CatagpryComponent(),
+          WellpaperPopularComponent(),
         ]),
       ),
     );
