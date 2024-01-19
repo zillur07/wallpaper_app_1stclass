@@ -84,6 +84,7 @@ class WellpaperSearchComponent extends StatelessWidget {
                               wallpaperData: controller
                                   .wallpapersSearchList, // Pass the wallpaper data
                             ),
+                            transition: Transition.rightToLeftWithFade,
                           );
                         },
                         child: Hero(

@@ -15,10 +15,10 @@ class SearchPage extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(
-                left: 45.0,
-                right: 8.0,
-                top: 4,
-                bottom: 4,
+                left: 50.0,
+                right: 15.0,
+                top: 6,
+                bottom: 6,
               ),
               child: GetBuilder<WallpaperController>(
                 builder: (controller) => TextField(
@@ -29,6 +29,7 @@ class SearchPage extends StatelessWidget {
                     controller.updateSearchQuery(query);
                   },
                   decoration: InputDecoration(
+                    contentPadding: EdgeInsets.only(left: 15),
                     suffixIcon: IconButton(
                       icon: const Icon(Icons.search),
                       onPressed: () {

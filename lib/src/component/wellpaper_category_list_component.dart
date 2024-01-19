@@ -36,6 +36,7 @@ class WellpaperCategoryListComponent extends StatelessWidget {
                         initialPageIndex: index,
                         wallpaperData: controller.wallpapersSearchList,
                       ),
+                      transition: Transition.rightToLeftWithFade,
                     );
                   },
                   child: Hero(

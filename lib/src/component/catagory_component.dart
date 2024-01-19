@@ -31,7 +31,10 @@ class CatagpryComponent extends StatelessWidget {
                   return InkWell(
                     onTap: () async {
                       await controller.fetchWallpapersSearch1(category.catName);
-                      Get.to(CategoryPage(categoryModel: category));
+                      Get.to(
+                        CategoryPage(categoryModel: category),
+                        transition: Transition.rightToLeftWithFade,
+                      );
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(
@@ -93,6 +96,9 @@ class CatagpryComponent extends StatelessWidget {
                   );
                 },
               ),
+            ),
+            const SizedBox(
+              height: 12,
             ),
           ],
         ),

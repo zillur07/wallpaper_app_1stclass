@@ -187,23 +187,25 @@ class WallpaperController extends GetxController {
       "Cars",
       "Flowers",
       'Birds',
+      'Fish',
       "Nature",
       "Travel",
       'Baby',
       'Girl',
       'Love',
+      'Tree',
       "City",
       "Abstract",
       "Minimalist",
       "Space",
+      'Gym',
       "Animals",
       "Gaming",
       "Vintage",
       "Sports",
       "Street",
       "Laptop",
-      'Dark',
-      'Fish'
+      'Dark'
     ];
 
     categoryModelList.clear();

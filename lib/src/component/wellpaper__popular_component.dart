@@ -52,6 +52,7 @@ class WellpaperPopularComponent extends StatelessWidget {
                                 wallpaperData: controller
                                     .wallpapersPopular, // Pass the wallpaper data
                               ),
+                              transition: Transition.native,
                             );
                           },
                           child: Hero(

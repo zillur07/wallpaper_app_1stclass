@@ -14,6 +14,7 @@ class WellpaperComponent extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
             controller.wallpapers.isEmpty
@@ -45,13 +46,20 @@ class WellpaperComponent extends StatelessWidget {
                         final item = controller.wallpapers[index];
                         return InkWell(
                           onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => SinglePage(
-                                  initialPageIndex: index,
-                                  wallpaperData: controller.wallpapers,
-                                ),
+                            // Navigator.of(context).push(
+                            //   MaterialPageRoute(
+                            //     builder: (context) => SinglePage(
+                            //       initialPageIndex: index,
+                            //       wallpaperData: controller.wallpapers,
+                            //     ),
+                            //   ),
+                            // );
+                            Get.to(
+                              SinglePage(
+                                initialPageIndex: index,
+                                wallpaperData: controller.wallpapers,
                               ),
+                              transition: Transition.native,
                             );
                           },
                           child: Hero(
