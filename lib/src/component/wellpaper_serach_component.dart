@@ -98,12 +98,21 @@ class WellpaperSearchComponent extends StatelessWidget {
                             //   fit: BoxFit.cover,
                             // ),
 
-                            child: CachedNetworkImage(
-                              imageUrl: item.src.medium,
-                              fit: BoxFit.cover,
-                              placeholder: (BuildContext context, String url) =>
-                                  Container(
-                                color: Colors.purple,
+                            child: ClipRRect(
+                              borderRadius: const BorderRadius.only(
+                                bottomLeft: Radius.circular(8),
+                                bottomRight: Radius.circular(8),
+                                topLeft: Radius.circular(8),
+                                topRight: Radius.circular(8),
+                              ),
+                              child: CachedNetworkImage(
+                                imageUrl: item.src.medium,
+                                fit: BoxFit.cover,
+                                placeholder:
+                                    (BuildContext context, String url) =>
+                                        Container(
+                                  color: Colors.purple,
+                                ),
                               ),
                             ),
                           ),

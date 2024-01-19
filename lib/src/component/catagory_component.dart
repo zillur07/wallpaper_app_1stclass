@@ -14,16 +14,19 @@ class CatagpryComponent extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
+            const SizedBox(
+              height: 12,
+            ),
             Obx(
               () => GridView.builder(
                 shrinkWrap: true,
                 primary: false,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 1.0,
-                  mainAxisSpacing: 10.0,
-                  childAspectRatio: 2.0,
-                  mainAxisExtent: 150.0,
+                  crossAxisSpacing: 2.0,
+                  mainAxisSpacing: 0.0,
+                  childAspectRatio: 1.0,
+                  mainAxisExtent: 160.0,
                 ),
                 itemCount: controller.categoryModelList.length,
                 itemBuilder: (BuildContext context, int index) {
@@ -40,19 +43,19 @@ class CatagpryComponent extends StatelessWidget {
                       padding: const EdgeInsets.only(
                         left: 10,
                         right: 10,
-                        top: 15,
+                        bottom: 12,
                       ),
                       child: Stack(
                         children: [
-                          Container(
+                          SizedBox(
                             height: 150,
                             width: Get.width - 200,
                             child: ClipRRect(
-                              borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(5),
-                                bottomRight: Radius.circular(5),
-                                topLeft: Radius.circular(12),
-                                topRight: Radius.circular(12),
+                              borderRadius: const BorderRadius.only(
+                                bottomLeft: Radius.circular(8),
+                                bottomRight: Radius.circular(8),
+                                topLeft: Radius.circular(8),
+                                topRight: Radius.circular(8),
                               ),
                               // child: Image.network(
                               //   category.catImgUrl,
@@ -73,9 +76,9 @@ class CatagpryComponent extends StatelessWidget {
                             bottom: 0,
                             child: Container(
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(5),
-                                  bottomRight: Radius.circular(5),
+                                borderRadius: const BorderRadius.only(
+                                  bottomLeft: Radius.circular(8),
+                                  bottomRight: Radius.circular(8),
                                 ),
                                 color: Colors.black.withOpacity(0.4),
                               ),
@@ -84,7 +87,7 @@ class CatagpryComponent extends StatelessWidget {
                               child: Center(
                                 child: Text(
                                   category.catName,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 20, color: Colors.white),
                                 ),
                               ),
@@ -96,9 +99,6 @@ class CatagpryComponent extends StatelessWidget {
                   );
                 },
               ),
-            ),
-            const SizedBox(
-              height: 12,
             ),
           ],
         ),

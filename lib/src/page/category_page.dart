@@ -13,9 +13,9 @@ class CategoryPage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          categoryModel.catName,
-          style:
-              const TextStyle(fontWeight: FontWeight.bold, color: Colors.pink),
+          '${categoryModel.catName} Wellpaper',
+          style: const TextStyle(
+              fontWeight: FontWeight.w600, fontSize: 19, color: Colors.pink),
         ),
         actions: [],
         iconTheme: const IconThemeData(
