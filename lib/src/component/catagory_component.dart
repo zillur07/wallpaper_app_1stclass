@@ -1,5 +1,6 @@
 import 'package:app_name/src/controllers/wallpaper_controller.dart';
 import 'package:app_name/src/page/category_page.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -50,9 +51,18 @@ class CatagpryComponent extends StatelessWidget {
                                 topLeft: Radius.circular(12),
                                 topRight: Radius.circular(12),
                               ),
-                              child: Image.network(
-                                category.catImgUrl,
+                              // child: Image.network(
+                              //   category.catImgUrl,
+                              //   fit: BoxFit.cover,
+                              // ),
+                              child: CachedNetworkImage(
+                                imageUrl: category.catImgUrl,
                                 fit: BoxFit.cover,
+                                placeholder:
+                                    (BuildContext context, String url) =>
+                                        Container(
+                                  color: Colors.purple,
+                                ),
                               ),
                             ),
                           ),

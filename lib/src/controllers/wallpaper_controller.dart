@@ -189,6 +189,7 @@ class WallpaperController extends GetxController {
       'Birds',
       "Nature",
       "Travel",
+      'Baby',
       'Girl',
       'Love',
       "City",
@@ -202,6 +203,7 @@ class WallpaperController extends GetxController {
       "Street",
       "Laptop",
       'Dark',
+      'Fish'
     ];
 
     categoryModelList.clear();

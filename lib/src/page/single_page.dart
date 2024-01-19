@@ -1,4 +1,5 @@
 import 'package:app_name/src/model/wallpaper.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -312,9 +313,19 @@ class _SinglePageState extends State<SinglePage> {
             child: SizedBox(
               height: Get.height,
               width: Get.width,
-              child: Image.network(
-                widget.wallpaperData[index].src.large2x,
+              // child: Image.network(
+              //   widget.wallpaperData[index].src.large2x,
+              //   fit: BoxFit.cover,
+              // ),
+
+              child: CachedNetworkImage(
+                imageUrl: widget.wallpaperData[index].src.large2x,
                 fit: BoxFit.cover,
+                progressIndicatorBuilder: (context, url, progress) => Center(
+                  child: CircularProgressIndicator(
+                    value: progress.progress,
+                  ),
+                ),
               ),
             ),
           ),

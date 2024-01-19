@@ -1,5 +1,6 @@
 import 'package:app_name/src/component/wellpaper_category_list_component.dart';
 import 'package:app_name/src/model/catagory.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class CategoryPage extends StatelessWidget {
@@ -26,11 +27,22 @@ class CategoryPage extends StatelessWidget {
         children: [
           Stack(
             children: [
-              Image.network(
-                  height: 150,
-                  width: MediaQuery.of(context).size.width,
-                  fit: BoxFit.cover,
-                  categoryModel.catImgUrl),
+              // Image.network(
+              //   height: 150,
+              //   width: MediaQuery.of(context).size.width,
+              //   fit: BoxFit.cover,
+              //   categoryModel.catImgUrl,
+              // ),
+              CachedNetworkImage(
+                height: 150,
+                width: MediaQuery.of(context).size.width,
+                fit: BoxFit.cover,
+                imageUrl: categoryModel.catImgUrl,
+                placeholder: (BuildContext context, String url) => Container(
+                  color: Colors.pink,
+                ),
+              ),
+
               Container(
                 height: 150,
                 width: MediaQuery.of(context).size.width,

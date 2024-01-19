@@ -1,5 +1,6 @@
 import 'package:app_name/src/controllers/wallpaper_controller.dart';
 import 'package:app_name/src/page/single_page.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -43,9 +44,18 @@ class WellpaperCategoryListComponent extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: Image.network(
-                        item.src.medium,
+                      // child: Image.network(
+                      //   item.src.medium,
+                      //   fit: BoxFit.cover,
+                      // ),
+
+                      child: CachedNetworkImage(
+                        imageUrl: item.src.medium,
                         fit: BoxFit.cover,
+                        placeholder: (BuildContext context, String url) =>
+                            Container(
+                          color: Colors.pink.shade200,
+                        ),
                       ),
                     ),
                   ),

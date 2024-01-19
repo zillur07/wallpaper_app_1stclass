@@ -41,6 +41,7 @@ dependencies:
   dio:
   flutter_wallpaper_manager: ^0.0.4
   flutter_cache_manager:
+  cached_network_image: ^3.3.1
   
   
 
